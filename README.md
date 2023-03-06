@@ -10,11 +10,14 @@ This is a demo project to show how to use Fastify with Typescript.
  * [x] Prettier
  * [x] Swagger
  * [x] DotEnv
+ * [x] Docker
+ * [x] MongoDb
+ * [x] JWT
 
 ## Use Cases
  * [x] Health Check
  * [x] Signup a new user
- * [ ] Login
+ * [x] Login
  * [ ] Get user info
  * [ ] Add some protected routes
 
@@ -34,12 +37,18 @@ curl -X POST \
 }'
 ```
 
-## TODO
- * [ ] Add Docker
- * [ ] Add MongoDB
- * [ ] Add JWT
- * [ ] Add Authentication
- * [ ] Add Authorization
+### User Login
+
+```bash
+curl -X POST \
+  'http://localhost:4000/api/user/login' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "username": "jack",
+  "password": "Password123"
+}'
+```
 
 ## Initial Setup
 
@@ -95,19 +104,19 @@ make status
 ### Launch test
 
 ```bash
-make test
+make testHelper
 ```
 
 ### Launch test with coverage
 
 ```bash
-make test-coverage
+make testHelper-coverage
 ```
 
 ### Launch test with filter
 
 ```bash
-make test-coverage filter=<pattern>
+make testHelper-coverage filter=<pattern>
 ```
 
 ### Linter

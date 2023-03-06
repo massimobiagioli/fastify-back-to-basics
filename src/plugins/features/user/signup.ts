@@ -7,17 +7,19 @@ async function signupFeaturePlugin(
   fastify: FastifyInstance,
   _opts: FastifyPluginOptions,
 ): Promise<void> {
-  const signupFeature = (db: Db | undefined) => {
-    return async (request: SignupRequestType) => {
+  const signupFeature =
+    (db: Db | undefined) => async (request: SignupRequestType) => {
       if (!db) {
         throw new Error('db is undefined')
       }
 
       const users = db.collection('users')
-      request.password = fastify.hashPassword(request.email, request.password)
+      request.password = fastify.hashPassword(
+        request.username,
+        request.password,
+      )
       await users.insertOne(request)
     }
-  }
 
   fastify.decorate('signupFeature', signupFeature(fastify.mongo.db))
 }

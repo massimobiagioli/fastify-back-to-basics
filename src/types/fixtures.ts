@@ -1,6 +1,6 @@
 import { Static, Type } from '@sinclair/typebox'
 
-export const SignupRequest = Type.Object(
+export const CreateUserRequest = Type.Object(
   {
     email: Type.String({ format: 'email' }),
     username: Type.String(),
@@ -13,4 +13,9 @@ export const SignupRequest = Type.Object(
   },
 )
 
-export type SignupRequestType = Static<typeof SignupRequest>
+export type CreateUserRequestType = Partial<Static<typeof CreateUserRequest>>
+
+export type FixturesType = {
+  dropUsers: () => Promise<void>
+  createUser: (request?: CreateUserRequestType) => Promise<void>
+}

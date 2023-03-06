@@ -30,7 +30,6 @@ export default async function (
       } catch (error) {
         reply.code(500).send()
       }
-      await fastify.signupFeature(request.body)
     },
   )
 }

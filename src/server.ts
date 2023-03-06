@@ -5,10 +5,10 @@ async function start() {
 
   app.listen({ port: app.config.SERVER_PORT }, (err, address) => {
     if (err != null) {
-      console.error(err)
+      app.log.error(err)
       process.exit(1)
     }
-    console.log(`Server listening at ${address}`)
+    app.log.debug(`Server listening at ${address}`)
   })
 }
 
