@@ -7,7 +7,7 @@ import { SignupRequestType } from './types/signup'
 declare module 'fastify' {
   interface FastifyInstance {
     config: ConfigType
-
+    hashPassword: (username: string, password: string) => string
     signupFeature: (request: SignupRequestType) => Promise<any>
   }
 }

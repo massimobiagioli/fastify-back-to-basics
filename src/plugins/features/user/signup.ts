@@ -14,6 +14,7 @@ async function signupFeaturePlugin(
       }
 
       const users = db.collection('users')
+      request.password = fastify.hashPassword(request.email, request.password)
       await users.insertOne(request)
     }
   }
