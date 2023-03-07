@@ -18,4 +18,7 @@ export type CreateUserRequestType = Partial<Static<typeof CreateUserRequest>>
 export type FixturesType = {
   dropUsers: () => Promise<void>
   createUser: (request?: CreateUserRequestType) => Promise<void>
+  dropDevices: () => Promise<void>
+  populateDevices: () => Promise<void>
+  load: () => Promise<void>
 }

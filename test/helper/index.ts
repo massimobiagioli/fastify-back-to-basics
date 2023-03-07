@@ -12,7 +12,6 @@ export const loginFactory = (app: FastifyInstance) => async (username: string, p
   })
 
   const loginInfo = response.json<LoginResponseType>()
-
   return loginInfo.token
 }
 

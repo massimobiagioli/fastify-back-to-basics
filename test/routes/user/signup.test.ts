@@ -8,6 +8,7 @@ beforeEach(async () => {
   app = await createApp({
     logger: false,
   })
+  await app.fixtures.dropUsers()
 })
 
 afterEach(async () => {

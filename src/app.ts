@@ -7,6 +7,7 @@ import { LoginRequestType } from './types/login'
 import { UserDtoType } from './types/user'
 import { FixturesType } from './types/fixtures'
 import { AuthenticateFunction } from './types/auth'
+import { DeviceDtoCollectionType } from './types/device'
 
 declare module 'fastify' {
   interface FastifyInstance {
@@ -16,6 +17,7 @@ declare module 'fastify' {
     signupFeature: (request: SignupRequestType) => Promise<void>
     loginFeature: (request: LoginRequestType) => Promise<string>
     findUserByUsernameFeature: (username: string) => Promise<UserDtoType | null>
+    listDevicesFeature: () => Promise<DeviceDtoCollectionType>
     fixtures: FixturesType
   }
 }
