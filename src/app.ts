@@ -6,14 +6,16 @@ import { SignupRequestType } from './types/signup'
 import { LoginRequestType } from './types/login'
 import { UserDtoType } from './types/user'
 import { FixturesType } from './types/fixtures'
+import { AuthenticateFunction } from './types/auth'
 
 declare module 'fastify' {
   interface FastifyInstance {
     config: ConfigType
     hashPassword: (username: string, password: string) => string
+    authenticate: AuthenticateFunction
     signupFeature: (request: SignupRequestType) => Promise<void>
     loginFeature: (request: LoginRequestType) => Promise<string>
-    findByUsernameFeature: (username: string) => Promise<UserDtoType | null>
+    findUserByUsernameFeature: (username: string) => Promise<UserDtoType | null>
     fixtures: FixturesType
   }
 }

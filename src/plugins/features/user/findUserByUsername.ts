@@ -7,7 +7,7 @@ async function findByUsernameFeaturePlugin(
   fastify: FastifyInstance,
   _opts: FastifyPluginOptions,
 ): Promise<void> {
-  const findByUsernameFeature =
+  const findUserByUsernameFeature =
     (db: Db | undefined) =>
     async (username: string): Promise<UserDtoType | null> => {
       if (!db) {
@@ -30,8 +30,8 @@ async function findByUsernameFeaturePlugin(
     }
 
   fastify.decorate(
-    'findByUsernameFeature',
-    findByUsernameFeature(fastify.mongo.db),
+    'findUserByUsernameFeature',
+    findUserByUsernameFeature(fastify.mongo.db),
   )
 }
 

@@ -18,7 +18,7 @@ This is a demo project to show how to use Fastify with Typescript.
  * [x] Health Check
  * [x] Signup a new user
  * [x] Login
- * [ ] Get user info
+ * [x] Get user info
  * [ ] Add some protected routes
 
 ### Signup a new user
@@ -48,6 +48,15 @@ curl -X POST \
   "username": "jack",
   "password": "Password123"
 }'
+```
+
+### Get user info
+
+```bash
+curl -X 'GET' \
+  'http://localhost:4000/api/user/me' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Bearer <token>' 
 ```
 
 ## Initial Setup

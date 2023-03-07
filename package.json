@@ -10,9 +10,9 @@
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "format": "prettier --config .prettierrc 'src/**/*.ts' --write",
-    "test": "ENV=test tap --ts --no-coverage",
-    "test:filter": "ENV=test tap --grep=$npm_config_filter --ts --no-coverage",
-    "test:coverage": "ENV=test tap --ts",
+    "test": "ENV=test tap test --ts --no-coverage",
+    "test:filter": "ENV=test tap test --grep=$npm_config_filter --ts --no-coverage",
+    "test:coverage": "ENV=test tap test --ts",
     "prepare": "husky install"
   },
   "keywords": [],

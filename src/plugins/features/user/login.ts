@@ -14,7 +14,7 @@ async function loginFeaturePlugin(
         throw new Error('db is undefined')
       }
 
-      const user = await fastify.findByUsernameFeature(request.username)
+      const user = await fastify.findUserByUsernameFeature(request.username)
       if (!user) {
         fastify.log.info(`User ${request.username} not found`)
         return null

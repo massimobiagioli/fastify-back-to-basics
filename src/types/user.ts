@@ -10,3 +10,25 @@ export const UserDto = Type.Object({
 })
 
 export type UserDtoType = Static<typeof UserDto>
+
+export const LoggedUser = Type.Object({
+  id: Type.String(),
+  username: Type.String(),
+  email: Type.String({ format: 'email' }),
+  firstname: Type.String(),
+  lastname: Type.String(),
+})
+
+export type LoggedUserType = Static<typeof LoggedUser>
+
+export const LoggedUserFactory = {
+  fromDto: (user: UserDtoType): LoggedUserType => {
+    return {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      firstname: user.firstname,
+      lastname: user.lastname,
+    }
+  },
+}
