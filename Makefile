@@ -1,4 +1,4 @@
-.PHONY: start down logs status mongo-shell build start-dev start-prod test test-coverage lint lint-fix format test-filter pre-commit-install help
+.PHONY: up down logs status mongo-shell build start-dev start-prod fictures fixtures-test test test-coverage lint lint-fix format test-filter pre-commit-install help
 .DEFAULT_GOAL := help
 run-docker-compose = docker compose -f docker-compose.yml
 run-npm-run = npm run
@@ -27,13 +27,19 @@ start-dev: # Start app in development mode
 start-prod: build # Start app in production mode
 	$(run-npm-run) start:prod
 
-test: # Run all tests
+fixtures: # Load fixtures
+	$(run-npm-run) fixtures:load:dev
+
+fixtures-test: fixtures-test # Load fixtures test
+	$(run-npm-run) fixtures:load:test
+
+test: fixtures-test # Run all tests
 	$(run-npm-run) test
 
 test-coverage: # Run all tests with coverage
 	$(run-npm-run) test:coverage
 
-test-filter: # Run all tests with filter
+test-filter: fixtures-test # Run all tests with filter
 	$(run-npm-run) test:filter --filter=$(filter)
 
 lint: # Run linter

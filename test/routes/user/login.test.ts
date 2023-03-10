@@ -1,23 +1,16 @@
-import {afterEach, beforeEach, test} from "tap"
-import {FastifyInstance} from "fastify";
+import {test} from "tap"
 import createApp from "../../../src/app";
 import {LoginResponseType} from "../../../src/types/login";
 
-let app: FastifyInstance;
-
-beforeEach(async () => {
-  app = await createApp({
+test('login', async t => {
+  const app = createApp({
     logger: false,
   })
-  await app.fixtures.dropUsers()
-  await app.fixtures.createUser()
-})
 
-afterEach(async () => {
-  await app.close();
-})
-
-test('login', async t => {
+  t.teardown(() => {
+    app.close();
+  })
+  
   const response = await app.inject({
     method: 'POST',
     url: '/api/user/login',
@@ -34,6 +27,14 @@ test('login', async t => {
 })
 
 test('login fail with wrong password', async t => {
+  const app = createApp({
+    logger: false,
+  })
+
+  t.teardown(() => {
+    app.close();
+  })
+  
   const response = await app.inject({
     method: 'POST',
     url: '/api/user/login',
@@ -47,6 +48,14 @@ test('login fail with wrong password', async t => {
 })
 
 test('login fail with not existing user', async t => {
+  const app = createApp({
+    logger: false,
+  })
+
+  t.teardown(() => {
+    app.close();
+  })
+  
   const response = await app.inject({
     method: 'POST',
     url: '/api/user/login',

@@ -2,6 +2,12 @@ import fp from 'fastify-plugin'
 import { FastifyInstance, FastifyPluginOptions } from 'fastify'
 import crypto from 'crypto'
 
+declare module 'fastify' {
+  interface FastifyInstance {
+    hashPassword: (username: string, password: string) => string
+  }
+}
+
 async function hashPasswordPlugin(
   fastify: FastifyInstance,
   _opts: FastifyPluginOptions,

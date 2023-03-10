@@ -1,21 +1,15 @@
-import {afterEach, beforeEach, test} from "tap"
-import {FastifyInstance} from "fastify";
+import {test} from "tap"
 import createApp from "../../../src/app";
 
-let app: FastifyInstance;
-
-beforeEach(async () => {
-  app = await createApp({
+test('signup', async t => {
+  const app = createApp({
     logger: false,
   })
-  await app.fixtures.dropUsers()
-})
 
-afterEach(async () => {
-  await app.close();
-})
-
-test('signup', async t => {
+  t.teardown(() => {
+    app.close();
+  })
+  
   const response = await app.inject({
     method: 'POST',
     url: '/api/user/signup',
@@ -32,6 +26,14 @@ test('signup', async t => {
 })
 
 test('signup with invalid payload', async t => {
+  const app = createApp({
+    logger: false,
+  })
+
+  t.teardown(() => {
+    app.close();
+  })
+  
   const response = await app.inject({
     method: 'POST',
     url: '/api/user/signup',

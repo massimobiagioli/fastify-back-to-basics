@@ -6,10 +6,6 @@ services:
       - ./data:/data/db
     ports:
       - "27717:27017"
-  mongodb-test:
-    image: mongo:6.0.3
-    ports:
-      - "27718:27017"
 volumes:
   mongodb:
     driver: local

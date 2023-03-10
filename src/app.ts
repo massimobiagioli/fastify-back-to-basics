@@ -2,22 +2,11 @@ import fastify, { FastifyInstance, FastifyServerOptions } from 'fastify'
 import autoload from '@fastify/autoload'
 import { join } from 'path'
 import { ConfigType } from './types/config'
-import { SignupRequestType } from './types/signup'
-import { LoginRequestType } from './types/login'
-import { UserDtoType } from './types/user'
 import { FixturesType } from './types/fixtures'
-import { AuthenticateFunction } from './types/auth'
-import { DeviceDtoCollectionType } from './types/device'
 
 declare module 'fastify' {
   interface FastifyInstance {
     config: ConfigType
-    hashPassword: (username: string, password: string) => string
-    authenticate: AuthenticateFunction
-    signupFeature: (request: SignupRequestType) => Promise<void>
-    loginFeature: (request: LoginRequestType) => Promise<string>
-    findUserByUsernameFeature: (username: string) => Promise<UserDtoType | null>
-    listDevicesFeature: () => Promise<DeviceDtoCollectionType>
     fixtures: FixturesType
   }
 }

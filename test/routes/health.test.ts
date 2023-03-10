@@ -1,21 +1,16 @@
-import {afterEach, beforeEach, test} from "tap"
-import {FastifyInstance} from "fastify";
+import {test} from "tap"
 import createApp from "../../src/app";
 import {HealthResponseType} from "../../src/types/health";
 
-let app: FastifyInstance;
-
-beforeEach(async () => {
-  app = await createApp({
+test('health', async t => {
+  const app = createApp({
     logger: false,
   })
-})
 
-afterEach(async () => {
-  await app.close();
-})
-
-test('health', async t => {
+  t.teardown(() => {
+    app.close();
+  })
+  
   const response = await app.inject({
     method: 'GET',
     url: '/api/health',

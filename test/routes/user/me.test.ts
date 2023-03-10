@@ -1,26 +1,18 @@
-import {afterEach, beforeEach, test} from "tap"
-import {FastifyInstance} from "fastify";
+import {test} from "tap"
 import createApp from "../../../src/app";
 import {LoggedUserType} from "../../../src/types/user";
-import {loginFactory, LoginFunction} from "../../helper";
-
-let app: FastifyInstance
-let login: LoginFunction
-
-beforeEach(async () => {
-  app = await createApp({
-    logger: false,
-  })
-  await app.fixtures.dropUsers()
-  await app.fixtures.createUser()
-  login = loginFactory(app)
-})
-
-afterEach(async () => {
-  await app.close();
-})
+import {loginFactory} from "../../helper";
 
 test('get logged user info', async t => {
+  const app = createApp({
+    logger: false,
+  })
+
+  t.teardown(() => {
+    app.close();
+  })
+  
+  const login = loginFactory(app)
   const token = await login('tester', 'Tester123')
 
   const response = await app.inject({
@@ -41,6 +33,14 @@ test('get logged user info', async t => {
 })
 
 test('cannot retrieve logged user info if not authenticated', async t => {
+  const app = createApp({
+    logger: false,
+  })
+
+  t.teardown(() => {
+    app.close();
+  })
+  
   const response = await app.inject({
     method: 'GET',
     url: '/api/user/me'
@@ -50,6 +50,14 @@ test('cannot retrieve logged user info if not authenticated', async t => {
 })
 
 test('cannot retrieve logged user info if bad token provided', async t => {
+  const app = createApp({
+    logger: false,
+  })
+
+  t.teardown(() => {
+    app.close();
+  })
+
   const response = await app.inject({
     method: 'GET',
     url: '/api/user/me',

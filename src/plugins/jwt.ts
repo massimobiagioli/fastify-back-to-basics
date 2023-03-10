@@ -6,6 +6,13 @@ import {
   FastifyRequest,
 } from 'fastify'
 import fastifyJwt from '@fastify/jwt'
+import { AuthenticateFunction } from '../types/auth'
+
+declare module 'fastify' {
+  interface FastifyInstance {
+    authenticate: AuthenticateFunction
+  }
+}
 
 async function jwtPlugin(
   fastify: FastifyInstance,

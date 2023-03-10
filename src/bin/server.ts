@@ -1,8 +1,8 @@
-import createApp from './app'
+import createApp from '../app'
 
-async function start() {
-  const app = await createApp()
+const app = createApp()
 
+app.ready().then(() => {
   app.listen({ port: app.config.SERVER_PORT }, (err, address) => {
     if (err != null) {
       app.log.error(err)
@@ -10,6 +10,4 @@ async function start() {
     }
     app.log.debug(`Server listening at ${address}`)
   })
-}
-
-start()
+})
